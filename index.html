@@ -1,23 +1,587 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+ <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "name": "2026년형 벤츠 GLE 리스 전문센터",
+    "description": "벤츠 GLE 300d, 450, 53 AMG 모델의 2026년 최신 리스 견적 비교 및 할인 프로모션 정보 제공.",
+    "url": "https://www.example.com/benz-gle-lease-2026",
+    "telephone": "02-XXX-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울특별시 강남구 테헤란로 XXX",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "postalCode": "061XX",
+      "addressCountry": "KR"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "벤츠 GLE 리스 상품",
+      "itemListElement": [
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"벤츠 GLE 300d 4MATIC 리스"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"벤츠 GLE 450 4MATIC 리스"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"벤츠 GLE 53 AMG 4MATIC+ 리스"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"벤츠 GLE 63 AMG 4MATIC+ 리스"}}
+      ]
+    }
+  }
+  </script>
+
+  <!-- Google Fonts for professional look -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+
+  <style>
+    /* Reset and base styles */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f6f9; /* Soft light background */
+      color: #333;
+      line-height: 1.6;
+    }
+    header, section, footer {
+      max-width: 1000px; /* Wider layout for content-heavy page */
+      margin: 30px auto;
+      padding: 0 25px;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Soft shadow for depth */
+      border-radius: 12px;
+    }
+    header {
+      padding: 40px 25px;
+      background: linear-gradient(135deg, #f7f9fc, #eef1f5);
+      border-bottom: 3px solid #0056b3; /* Brand color highlight */
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.5rem;
+      color: #004085; /* Deep blue title */
+      font-weight: 800;
+      margin-top: 0.5em;
+      margin-bottom: 0.3em;
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: #0056b3; /* Secondary heading color */
+      font-weight: 700;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+      border-bottom: 2px solid #e0eaf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 1.4rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    p, li {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 1em;
+    }
+    p strong { color: #004085; } /* Highlight key terms */
+
+    /* Navigation */
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-left: 0;
+      list-style: none;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+      margin-bottom: 1em;
+    }
+    nav li {
+      margin-bottom: 5px;
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #0056b3;
+      background: #f0f8ff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #0056b3;
+      color: #ffffff;
+    }
+
+    /* Image section */
+    .hero-image {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden; /* Ensure border radius applies to image */
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    th, td {
+      border: 1px solid #e0e0e0;
+      padding: 14px 18px;
+      text-align: left;
+    }
+    th {
+      background-color: #f5f5f5;
+      color: #333;
+      font-weight: 700;
+      text-align: center;
+    }
+    tr:nth-child(even) { background-color: #fafafa; } /* Zebra striping for readability */
+    td { font-size: 0.95rem; }
+
+    /* Forms */
+    .input-section {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .input-group {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+      border-color: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+      outline: none;
+    }
+    textarea { resize: vertical; min-height: 100px; }
+    button.cta-btn {
+      background-color: #0056b3;
+      color: white;
+      padding: 16px 35px;
+      font-size: 1.15rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-weight: 700;
+      width: 100%; /* Full width button for better mobile conversion */
+      max-width: 400px;
+      align-self: center;
+    }
+    button.cta-btn:hover {
+      background-color: #004085;
+      transform: translateY(-2px);
+    }
+
+    /* Visual elements */
+    .key-info-box {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .key-info-box h3 {
+      color: #0056b3;
+      margin-top: 0;
+    }
+    .chart-container {
+      margin: 40px 0;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      overflow-x: auto; /* For graph on mobile */
+    }
+
+    /* FAQ accordion style */
+    .faq-item {
+      border-bottom: 1px solid #e0e0e0;
+      padding: 15px 0;
+      cursor: pointer;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #1a1a1a;
+      transition: color 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-item h3:hover { color: #0056b3; }
+    .faq-answer {
+      display: none; /* Hidden by default */
+      padding-top: 10px;
+      color: #555;
+      border-top: 1px solid #eee;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .faq-icon { font-size: 1.2rem; margin-left: 10px; }
+
+    /* External links and disclaimer */
+    .external-resources ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    a.external-link { color: #0056b3; text-decoration: none; font-weight: 500; }
+    a.external-link:hover { text-decoration: underline; }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      nav ul { flex-direction: column; }
+      header, section, footer { margin: 15px; padding: 20px; }
+      .input-group { flex-basis: 100%; }
+      button.cta-btn { max-width: 100%; }
+    }
+  </style>
+
+  <script>
+    // FAQ toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const answer = item.querySelector('.faq-answer');
+          const icon = item.querySelector('.faq-icon');
+          if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+            icon.textContent = '+';
+          } else {
+            answer.style.display = 'block';
+            icon.textContent = '-';
+          }
+        });
+      });
+    });
+  </script>
+
+</head>
+<body>
+
+  <!-- Pexels Image Placeholder -->
+  <style>
+    .hero-image {
+      background-image: url('https://images.pexels.com/photos/10350110/pexels-photo-10350110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); /* Pexels image related to luxury cars or Mercedes-Benz */
+    }
+  </style>
+
+  <header>
+    <h1>2026년 벤츠 GLE 리스 가격 비교 및 견적 전문센터</h1>
+    <p>2026년형 벤츠 GLE 300d, 450, 53 AMG 리스 최저가 견적을 지금 바로 확인하세요. 차량 모델별 장단점, 월 납입료, 프로모션 혜택, 전문 업체 순위 비교까지, 신차 리스에 대한 모든 정보를 제공합니다.</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#overview">GLE 리스 개요</a></li>
+        <li><a href="#models">모델별 상세 분석</a></li>
+        <li><a href="#price-comparison">가격 비교 및 견적</a></li>
+        <li><a href="#pros-cons">리스 장단점</a></li>
+        <li><a href="#process">리스 진행 절차</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+        <li><a href="#contact">견적 요청</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <section id="overview">
+    <h2>벤츠 GLE 리스: 2026년 신차 트렌드 분석</h2>
+    <div class="hero-image" aria-label="메르세데스-벤츠 GLE 리스 차량 이미지"></div>
+    <p>메르세데스-벤츠 GLE 클래스는 럭셔리 SUV 시장에서 압도적인 존재감을 자랑하며, 특히 2026년형 모델은 한층 더 진화된 디자인과 첨단 기술로 무장했습니다. 고성능 SUV인 GLE는 높은 차량 가액 때문에 초기 구매 비용 부담이 큰 편입니다. 따라서 **신차 리스**는 이러한 부담을 줄이면서도 최신 모델을 경험할 수 있는 합리적인 대안으로 각광받고 있습니다. 본 전문센터에서는 2026년 최신 모델의 **월 납입금**과 **할인 혜택**을 포함한 **정확한 예상 비용**을 비교 분석하여 **최저가 견적**을 제공합니다. 벤츠 GLE를 운용하고자 하는 법인 또는 개인 사업자, 혹은 일반 개인에게도 리스 방식은 **다양한 장점**을 제공합니다.</p>
+
+    <h3>왜 2026년형 GLE 리스를 선택해야 할까요?</h3>
+    <p>최근 자동차 시장은 잦은 모델 변경과 기술 발전 속도가 빠릅니다. **2026년형 벤츠 GLE**는 **디자인**과 **AI** 기반의 인포테인먼트 시스템 개선이 이루어지면서 더욱 매력적인 선택지가 되었습니다. **리스**는 신차 교체가 용이하다는 **장점**이 있어, 최신 트렌드를 빠르게 반영하려는 소비자들에게 특히 **추천**됩니다. 또한, **법인 리스**의 경우 **비용 처리**가 용이하여 세금 절감 효과를 극대화할 수 있습니다. **GLE 리스 전문 업체**들은 다양한 금융 상품을 비교하여 개인의 상황에 맞는 **맞춤형 견적**을 제시하고 있습니다. **네이버 검색**이나 **구글**에서 수많은 **후기**를 통해 알 수 있듯이, 벤츠 GLE 리스는 **내돈내산** 만족도가 매우 높은 편입니다.</p>
+  </section>
+
+  <section id="models">
+    <h2>GLE 모델별 상세 분석: 300d, 450, 53 AMG 비교</h2>
+    <p>벤츠 GLE 클래스는 크게 GLE SUV와 GLE 쿠페로 나뉘며, 파워트레인에 따라 다양한 모델이 존재합니다. 2026년 리스 시장에서 가장 인기 있는 모델들을 분석하여 **GLE 리스 가이드**를 제시합니다. 각 모델별 특징을 이해하면 리스 계약 시 **가격 비교**를 통해 **저렴한곳**을 찾는 데 도움이 됩니다.</p>
+
+    <h3>1. GLE 300d 4MATIC (디젤 엔트리 모델)</h3>
+    <p><strong>주요 특징:</strong> GLE 300d는 뛰어난 **연비**와 **효율성**을 자랑하며, 벤츠 GLE 라인업 중 가장 접근성이 좋은 모델입니다. **월 납입금**이 상대적으로 낮아 **개인 리스** 및 **법인** 엔트리급 SUV로 인기가 높습니다. <strong>단점</strong>은 450 모델 대비 출력 면에서 다소 아쉽다는 점이지만, 일상 주행 및 장거리 운행에 충분한 성능을 제공합니다. <strong>2026년형</strong>은 환경 규제에 맞춰 더욱 정교한 디젤 엔진 기술이 적용되어 있습니다.</p>
+
+    <h3>2. GLE 450 4MATIC (가솔린 주력 모델)</h3>
+    <p><strong>주요 특징:</strong> GLE 450은 강력한 성능과 부드러운 승차감으로 가장 많은 **추천**을 받는 모델입니다. 6기통 엔진의 정숙성과 48V 마일드 하이브리드 시스템이 결합되어 뛰어난 주행 질감을 선사합니다. <strong>리스 가격</strong>은 300d보다 높지만, **할인 프로모션**이 자주 진행되므로 **견적 비교**를 통해 **가성비**를 높일 수 있습니다. **장점**으로는 럭셔리 SUV의 정석으로 불리는 완성도 높은 디자인과 넉넉한 실내 공간을 꼽을 수 있습니다.</p>
+
+    <h3>3. GLE 53 AMG 4MATIC+ (고성능 AMG 모델)</h3>
+    <p><strong>주요 특징:</strong> GLE 53 AMG는 벤츠의 고성능 브랜드인 AMG의 파워를 담은 모델입니다. 압도적인 성능과 역동적인 디자인으로 주행의 즐거움을 극대화합니다. **AMG 모델**은 일반 모델보다 **차량가액**이 높아 **리스 비용**도 상당히 높게 **예상**됩니다. 하지만, **리스 전문 업체**를 통해 **신규 가입** 시 **할인 혜택**을 잘 활용하면 **저렴한** 조건으로 이용할 수 있습니다. <strong>단점</strong>은 높은 **월 납입금**과 상대적으로 낮은 **연비**입니다.</p>
+
+    <div class="key-info-box">
+      <h3>모델별 선택 가이드</h3>
+      <p><strong>GLE 300d:</strong> 연비와 합리적인 **비용**을 중시하는 운전자. <br><strong>GLE 450:</strong> 럭셔리 SUV의 표준적인 성능과 편안함을 원하는 운전자. <br><strong>GLE 53 AMG:</strong> 고성능 주행 퍼포먼스를 최우선으로 생각하는 운전자.</p>
+    </div>
+  </section>
+
+  <section id="price-comparison">
+    <h2>2026년형 벤츠 GLE 리스 가격 비교 및 견적 산정</h2>
+    <p>벤츠 GLE 리스 **가격**은 차량 모델, 옵션, 계약 기간, 초기 보증금/선납금 여부, 잔존가치 설정 등 여러 요소에 따라 크게 달라집니다. **평균적인 리스 비용**은 **월 납입금** 형태로 지불되며, 이는 차량가액과 리스 계약 조건에 따라 산출됩니다. 다음 표는 2026년형 벤츠 GLE 주요 모델의 **예상 월 납입금** 범위를 비교한 것입니다. (계약 기간 48개월, 보증금 20% 기준)</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>모델명</th>
+          <th>차량가액 (예상)</th>
+          <th>보증금 20% 기준 월 납입금 (예상)</th>
+          <th>주요 고려사항</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GLE 300d 4MATIC</td>
+          <td>약 1억 1,000만 원</td>
+          <td>160만 원 ~ 180만 원</td>
+          <td>가장 **저렴한** 초기 **비용**으로 벤츠 GLE 경험 가능.</td>
+        </tr>
+        <tr>
+          <td>GLE 450 4MATIC</td>
+          <td>약 1억 2,500만 원</td>
+          <td>180만 원 ~ 200만 원</td>
+          <td>**가성비**와 성능의 균형, **할인** 혜택이 중요.</td>
+        </tr>
+        <tr>
+          <td>GLE 53 AMG 4MATIC+</td>
+          <td>약 1억 6,000만 원</td>
+          <td>220만 원 ~ 250만 원</td>
+          <td>고성능 모델, **견적** 비교를 통한 **혜택** 확인 필수.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>참고:</strong> 위 **금액**은 보험료, 자동차세 등을 포함하지 않은 순수 리스료이며, **전문 업체**마다 **할인율**과 금융 조건이 다르므로 **견적 비교**가 필수입니다. **네이버**나 **구글**에서 **싼곳**을 찾기 위해 여러 **업체**를 비교하는 것이 중요합니다.</p>
+
+    <div class="chart-container">
+      <canvas id="leaseChart" width="800" height="400" aria-label="벤츠 GLE 모델별 리스 월 납입금 비교 그래프" role="img"></canvas>
+    </div>
+  </section>
+
+  <section id="pros-cons">
+    <h2>벤츠 GLE 리스 장단점 및 구매 방법별 차이점</h2>
+    <p>벤츠 GLE 리스는 신차 구매, 할부, 장기 렌트 등 다양한 차량 운용 방식 중 하나입니다. 각 방식의 **장단점**을 명확히 비교하여 자신에게 맞는 최적의 방법을 선택하는 것이 중요합니다. 특히 **리스**는 초기 **비용** 절감과 세금 **혜택** 면에서 큰 **장점**을 가집니다.</p>
+
+    <h3>1. 벤츠 GLE 리스의 주요 장점</h3>
+    <ul>
+      <li><strong>초기 비용 절감:</strong> 차량가액 전액을 지불할 필요 없이 보증금(선택 사항)만으로 신차 운행이 가능하여 초기 부담이 **저렴**합니다.</li>
+      <li><strong>세금 절감 효과:</strong> 리스료 전액을 손비 처리할 수 있어 **법인** 또는 **개인 사업자**의 세금 절감에 매우 유리합니다. **전문 업체**의 **세무 상담**을 통해 효과를 극대화할 수 있습니다.</li>
+      <li><strong>신차 교체 용이성:</strong> 계약 기간 만료 후 차량을 반납하고 새로운 **2026년형** 모델로 교체하기 쉽습니다. 이는 잦은 신차 교체를 원하는 소비자에게 큰 **장점**입니다.</li>
+      <li><strong>간편한 차량 관리:</strong> 리스 기간 동안 차량 등록 및 보험 처리를 리스사에서 대행하므로 관리가 편리합니다.</li>
+    </ul>
+
+    <h3>2. 벤츠 GLE 리스의 단점 및 주의사항</h3>
+    <ul>
+      <li><strong>총 비용 부담:</strong> 할부 구매 대비 총 이자 **비용**이 높을 수 있습니다. **장점**과 **단점**을 명확히 비교하여 신중하게 결정해야 합니다.</li>
+      <li><strong>주행거리 제한:</strong> 리스 계약 시 연간 주행거리 제한이 설정되며, 초과 시 **추가 비용**이 발생할 수 있습니다.</li>
+      <li><strong>중도 해지 수수료:</strong> 계약 기간 중 해지 시 **위약금**이 발생하므로 신중한 결정이 필요합니다.</li>
+      <li><strong>보험 처리:</strong> 보험료가 리스료에 포함되지 않고 개인적으로 가입해야 하는 경우가 많습니다.</li>
+    </ul>
+
+    <h3>3. 리스 vs. 할부 vs. 장기 렌트 차이점 비교</h3>
+    <p><strong>할부:</strong> 차량 소유권이 개인에게 있으며, 만기 시 잔액이 없습니다. 세금 혜택은 리스 대비 적지만, 차량을 완전히 소유할 수 있습니다.<br><strong>장기 렌트:</strong> 보험, 자동차세가 모두 포함되어 월 납입금이 일정합니다. 보험 경력이 단절되지 않고, 주행거리 제한이 넉넉한 경우가 많습니다. 하지만 '허' 번호판을 사용합니다.<br><strong>리스:</strong> 세금 혜택이 장기 렌트보다 크고 '호' 번호판을 사용합니다. **월 납입금**과 **총 비용**을 꼼꼼히 **비교**해 보아야 합니다.</p>
+  </section>
+
+  <section id="process">
+    <h2>벤츠 GLE 리스 신규 가입 및 진행 절차</h2>
+    <p><strong>신규 가입</strong>을 원하는 고객님들을 위해 **GLE 리스 전문 업체**에서 진행하는 일반적인 절차를 안내해 드립니다. 처음 리스를 이용하는 분들도 쉽게 따라할 수 있도록 상세히 설명드립니다. **견적**부터 **출고**까지의 과정을 이해하면 보다 **저렴한** 조건으로 계약할 수 있습니다.</p>
+    <ul>
+      <li><strong>1단계: 차량 모델 및 옵션 선택:</strong> 벤츠 GLE SUV 또는 GLE 쿠페, 그리고 모델(300d, 450, 53 AMG 등)과 옵션을 선택합니다.</li>
+      <li><strong>2단계: 맞춤 견적 요청 및 비교:</strong> **견적 문의** 양식을 통해 **전문 업체**에 연락합니다. 계약 기간, 보증금/선납금 비율, 잔존가치 등 조건을 설정하여 **최저가** 견적을 받습니다. 여러 금융사(하나캐피탈, KB캐피탈, 삼성카드 등)의 상품을 **비교**합니다.</li>
+      <li><strong>3단계: 심사 진행:</strong> 리스사에서 고객의 신용 등급 및 소득을 심사합니다. **신규 가입** 시 신용도에 따라 **할인 혜택**이 달라질 수 있습니다.</li>
+      <li><strong>4단계: 계약 체결 및 차량 출고:</strong> 심사가 승인되면 계약서를 작성하고, 차량 출고를 진행합니다. **2026년형** 모델의 경우 출고 기간이 길어질 수 있으므로 사전에 확인해야 합니다.</li>
+    </ul>
+    <p><strong>TIP:</strong> **전문 업체**에서는 다양한 **프로모션**을 진행합니다. **할인** <strong>혜택</strong>이나 **사은품** (블랙박스, 틴팅 등)을 제공하는 경우도 있으므로, **비교** 시 이러한 **지원금** 항목도 확인해 보세요. **내돈내산 후기**를 참고하여 믿을 수 있는 **업체**를 선택하는 것이 중요합니다.</p>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <div class="faq-item">
+      <h3>Q1: 벤츠 GLE 리스 계약 기간은 얼마나 되나요? <span class="faq-icon">+</span></h3>
+      <div class="faq-answer">
+        <p>A: 일반적으로 24개월부터 60개월까지 선택할 수 있습니다. 계약 기간이 길어질수록 월 납입금은 낮아지는 **장점**이 있지만, 총 **비용**은 높아질 수 있습니다. **전문 업체**와 상담하여 고객님의 차량 교체 주기와 **비용** 효율성을 고려한 최적의 기간을 설정하는 것이 **추천**됩니다.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3>Q2: 리스 만기 시 차량은 어떻게 처리하나요? <span class="faq-icon">+</span></h3>
+      <div class="faq-answer">
+        <p>A: 리스 만기 시점에는 크게 세 가지 선택지가 있습니다. 1) 차량 반납, 2) 잔존가치 지불 후 인수, 3) 재리스(연장)입니다. <strong>잔존가치</strong>는 계약 시점에 미리 정해지며, 벤츠 GLE와 같이 감가상각이 적은 인기 모델은 인수를 통해 중고차 판매 시 **혜택**을 볼 수 있는 **장점**이 있습니다.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3>Q3: 벤츠 GLE 리스 이용 중 사고가 나면 보험 처리는 어떻게 되나요? <span class="faq-icon">+</span></h3>
+      <div class="faq-answer">
+        <p>A: 리스 계약에 따라 보험료가 리스료에 포함될 수도 있고, 고객이 직접 **신규 가입**해야 할 수도 있습니다. <strong>장기 렌트</strong>와 달리 리스 차량은 고객의 보험 경력이 유지되므로, 사고 시 보험료 할증은 고객 개인에게 적용됩니다. 사고가 발생하면 **보험료** 인상이라는 **단점**이 있지만, **무사고 할인** <strong>혜택</strong>을 받을 수 있다는 **장점**도 있습니다.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3>Q4: 벤츠 GLE 리스와 장기 렌트의 가장 큰 차이점은 무엇인가요? <span class="faq-icon">+</span></h3>
+      <div class="faq-answer">
+        <p>A: 가장 큰 **차이점**은 번호판(리스: 일반 번호판 '호' 사용, 렌트: '허', '하', '호' 사용)과 보험입니다. 리스는 개인 보험을 가입하여 보험 경력을 유지하지만, 장기 렌트는 렌트사 보험을 이용합니다. **비용** 면에서는 장기 렌트가 리스보다 **저렴한곳**도 있지만, 세금 처리 방식과 보험 경력 유지 측면에서 **장단점**이 뚜렷합니다. **전문 업체**를 통해 **비교**해 보는 것이 좋습니다.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3>Q5: 리스 이용 시 벤츠 프로모션 할인 혜택을 받을 수 있나요? <span class="faq-icon">+</span></h3>
+      <div class="faq-answer">
+        <p>A: 네, **GLE 리스 전문 업체**는 딜러사와 제휴하여 벤츠 본사의 **신차 할인** 프로모션을 반영할 수 있습니다. 특히 비인기 모델이나 연말, 연초에는 **현금지원**이나 **할인** <strong>혜택</strong>이 클 수 있습니다. **신규 가입** 시점에 진행되는 **이벤트**나 **상품권** <strong>지원금</strong>을 꼼꼼히 확인하여 **저렴한** 견적을 받는 것이 중요합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>2026년형 벤츠 GLE 리스 맞춤 견적 요청</h2>
+    <p>아래 양식을 작성하시면 고객님의 상황에 맞는 벤츠 GLE 리스 **최저가 견적**을 신속하게 안내해 드립니다. 여러 금융사의 **견적**을 **비교**하여 **저렴한곳**을 **추천**해 드립니다. 견적 문의는 무료로 진행되며, **신규 가입** 시 다양한 **혜택**이 제공됩니다.</p>
+    <form action="/submit-gle-quote" method="post" aria-label="벤츠 GLE 리스 견적 문의 폼">
+      <div class="input-section">
+        <div class="input-group">
+          <label for="name">성함</label>
+          <input type="text" id="name" name="name" placeholder="홍길동" required />
+        </div>
+        <div class="input-group">
+          <label for="phoneNumber">연락처</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" placeholder="예: 010-1234-5678" required />
+        </div>
+        <div class="input-group">
+          <label for="leaseType">리스 종류</label>
+          <select id="leaseType" name="leaseType" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="individual">개인 리스</option>
+            <option value="business">법인/사업자 리스</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="modelPreference">희망 모델 (선택)</label>
+          <select id="modelPreference" name="modelPreference">
+            <option value="" disabled selected>선택하세요</option>
+            <option value="gle300d">GLE 300d 4MATIC</option>
+            <option value="gle450">GLE 450 4MATIC</option>
+            <option value="gle53amg">GLE 53 AMG 4MATIC+</option>
+            <option value="gle63amg">GLE 63 AMG 4MATIC+</option>
+            <option value="not-decided">미정</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="depositType">초기 비용 유형</label>
+          <select id="depositType" name="depositType" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="deposit">보증금 (만기 반환)</option>
+            <option value="prepayment">선납금 (월 납입료 차감)</option>
+            <option value="no-initial">초기 비용 없음 (무보증금)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="term">희망 계약 기간 (개월)</label>
+          <select id="term" name="term" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="36">36개월</option>
+            <option value="48">48개월</option>
+            <option value="60">60개월</option>
+          </select>
+        </div>
+        <div class="input-group" style="flex-basis: 100%;">
+          <label for="additionalInfo">추가 문의 사항</label>
+          <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="특별히 알고 싶은 사항이나 요청 사항을 적어주세요. 예: 2026년형 모델 할인 프로모션, 사은품, 현금지원 혜택 등"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="cta-btn">맞춤 견적 요청하기</button>
+    </form>
+  </section>
+
+  <section id="external-resources">
+    <h2>신뢰할 수 있는 외부 참고자료 및 연관 키워드</h2>
+    <p>보다 정확하고 심도 있는 정보를 원하시면 다음 신뢰할 수 있는 외부 사이트를 참고하십시오. 관련 검색어: <strong>벤츠 GLE 리스 디시</strong>, <strong>벤츠 GLE 리스 신차 가입 혜택</strong>, <strong>GLE 450 내돈내산 후기</strong>, <strong>벤츠 리스 순위</strong></p>
+    <ul>
+      <li><a href="https://www.mercedes-benz.co.kr/" target="_blank" rel="noopener" class="external-link">메르세데스-벤츠 코리아 공식 홈페이지</a></li>
+      <li><a href="https://www.kofia.or.kr/" target="_blank" rel="noopener" class="external-link">금융투자협회 (리스 금융 관련 정보)</a></li>
+      <li><a href="https://www.molit.go.kr/" target="_blank" rel="noopener" class="external-link">국토교통부 (자동차 등록 및 관련 법규)</a></li>
+      <li><a href="https://www.namu.wiki/w/%EB%A9%94%EB%A5%B4%EC%84%B8%EB%8D%B0%EC%8A%A4-%EB%B2%A4%EC%B8%A0%20GLE%20%ED%81%B4%EB%9E%98%EC%8A%A4" target="_blank" rel="noopener" class="external-link">나무위키: 메르세데스-벤츠 GLE 클래스</a></li>
+      <li><a href="https://auto.naver.com/" target="_blank" rel="noopener" class="external-link">네이버 자동차: 벤츠 GLE 모델 정보 및 시승 후기</a></li>
+    </ul>
+  </section>
+
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('leaseChart').getContext('2d');
+    const leaseChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['GLE 300d', 'GLE 450', 'GLE 53 AMG'],
+        datasets: [{
+          label: '예상 월 납입금 (만원, 48개월 기준)',
+          data: [170, 190, 235], // Sample data based on price comparison table
+          backgroundColor: [
+            '#0056b3', // Deep blue for GLE 300d
+            '#007bff', // Lighter blue for GLE 450
+            '#004085'  // Darker blue for GLE 53 AMG
+          ],
+          borderColor: '#ffffff',
+          borderWidth: 1,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 20,
+              callback: function(value) { return value + '만원'; }
+            },
+            title: {
+              display: true,
+              text: '월 납입금 (만원)',
+              color: '#333'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'GLE 모델',
+              color: '#333'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let label = context.dataset.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                label += context.parsed.y + '만원';
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+  
